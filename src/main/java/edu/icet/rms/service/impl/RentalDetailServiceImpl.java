@@ -1,7 +1,9 @@
 package edu.icet.rms.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.icet.rms.entity.HardwareItemEntity;
 import edu.icet.rms.entity.RentalDetailEntity;
+import edu.icet.rms.model.HardwareItem;
 import edu.icet.rms.model.RentalDetail;
 import edu.icet.rms.repository.RentalDetailRepository;
 import edu.icet.rms.service.RentalDetailService;
@@ -21,9 +23,10 @@ public class RentalDetailServiceImpl implements RentalDetailService {
     private final ObjectMapper mapper;
 
     @Override
-    public RentalDetail persist(RentalDetailEntity rentalDetailEntity) {
-        return mapper.convertValue(
-                rentalDetailRepository.save(rentalDetailEntity), RentalDetail.class);
+    public RentalDetail persist(RentalDetail rentalDetail) {
+        return mapper.convertValue(rentalDetailRepository.save(
+                        mapper.convertValue(rentalDetail, RentalDetailEntity.class)),
+                RentalDetail.class);
     }
 
     @Override
@@ -37,10 +40,11 @@ public class RentalDetailServiceImpl implements RentalDetailService {
     }
 
     @Override
-    public RentalDetail update(RentalDetailEntity rentalDetailEntity) {
-        if (rentalDetailRepository.existsById(rentalDetailEntity.getRentalDetailId())) {
-            return mapper.convertValue(
-                    rentalDetailRepository.save(rentalDetailEntity), RentalDetail.class);
+    public RentalDetail update(RentalDetail rentalDetail) {
+        if (rentalDetailRepository.existsById(rentalDetail.getRentalDetailId())) {
+            return mapper.convertValue(rentalDetailRepository.save(
+                            mapper.convertValue(rentalDetail, RentalDetailEntity.class)),
+                    RentalDetail.class);
         }
         return null;
     }

@@ -1,6 +1,5 @@
 package edu.icet.rms.controller;
 
-import edu.icet.rms.entity.CustomerEntity;
 import edu.icet.rms.model.Customer;
 import edu.icet.rms.service.CustomerService;
 import lombok.RequiredArgsConstructor;

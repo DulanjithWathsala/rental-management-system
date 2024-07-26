@@ -1,10 +1,6 @@
 package edu.icet.rms.controller;
 
-import edu.icet.rms.entity.CustomerEntity;
-import edu.icet.rms.entity.HardwareItemEntity;
-import edu.icet.rms.model.Customer;
 import edu.icet.rms.model.HardwareItem;
-import edu.icet.rms.service.CustomerService;
 import edu.icet.rms.service.HardwareItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +12,7 @@ import java.util.Map;
 @RestController
 @CrossOrigin
 @RequiredArgsConstructor
-@RequestMapping("/customer")
+@RequestMapping("/hardware-item")
 public class HardwareItemController {
 
     private final HardwareItemService hardwareItemService;

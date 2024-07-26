@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface RentalDetailService {
 
-    RentalDetail persist(RentalDetailEntity rentalDetailEntity);
+    RentalDetail persist(RentalDetail rentalDetail);
 
     List<RentalDetail> retrieveAll();
 
-    RentalDetail update(RentalDetailEntity rentalDetailEntity);
+    RentalDetail update(RentalDetail rentalDetail);
 
     String deleteById(Long id);
 
