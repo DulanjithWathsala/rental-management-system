@@ -1,4 +1,4 @@
-package edu.icet.rms.entity;
+package edu.icet.rms.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,14 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Entity
-@Table(name = "hardware_item")
 @NoArgsConstructor
 @AllArgsConstructor
-public class HardwareItemEntity {
+public class HardwareItem {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemId;
     private boolean availability;
     private String name;

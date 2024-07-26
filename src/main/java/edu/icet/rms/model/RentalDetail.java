@@ -1,4 +1,4 @@
-package edu.icet.rms.entity;
+package edu.icet.rms.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,14 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Entity
-@Table(name = "rental_detail")
 @NoArgsConstructor
 @AllArgsConstructor
-public class RentalDetailEntity {
+public class RentalDetail {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rentalDetailId;
     private Long rentalId;
     private Long itemId;
