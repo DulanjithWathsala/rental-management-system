@@ -11,7 +11,7 @@ public interface RentalDetailService {
 
     RentalDetail persist(RentalDetailEntity rentalDetailEntity);
 
-    List<HardwareItem> retrieveAll();
+    List<RentalDetail> retrieveAll();
 
     RentalDetail update(RentalDetailEntity rentalDetailEntity);
 
