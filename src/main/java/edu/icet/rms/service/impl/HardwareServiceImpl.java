@@ -1,9 +1,7 @@
 package edu.icet.rms.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.icet.rms.entity.CustomerEntity;
 import edu.icet.rms.entity.HardwareItemEntity;
-import edu.icet.rms.model.Customer;
 import edu.icet.rms.model.HardwareItem;
 import edu.icet.rms.repository.HardwareItemRepository;
 import edu.icet.rms.service.HardwareItemService;

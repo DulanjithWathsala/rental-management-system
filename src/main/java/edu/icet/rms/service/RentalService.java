@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface RentalService {
 
-    Rental persist(RentalEntity rentalEntity);
+    Rental persist(Rental rental);
 
     List<Rental> retrieveAll();
 
-    Rental update(RentalEntity rentalEntity);
+    Rental update(Rental rental);
 
     String deleteById(Long id);
 

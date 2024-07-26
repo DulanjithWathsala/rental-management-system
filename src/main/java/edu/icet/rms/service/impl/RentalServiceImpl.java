@@ -21,9 +21,10 @@ public class RentalServiceImpl implements RentalService {
     private final ObjectMapper mapper;
 
     @Override
-    public Rental persist(RentalEntity rentalEntity) {
-        return mapper.convertValue(
-                rentalRepository.save(rentalEntity), Rental.class);
+    public Rental persist(Rental rental) {
+        return mapper.convertValue(rentalRepository.save(
+                        mapper.convertValue(rental, RentalEntity.class)),
+                Rental.class);
     }
 
     @Override
@@ -37,10 +38,11 @@ public class RentalServiceImpl implements RentalService {
     }
 
     @Override
-    public Rental update(RentalEntity rentalEntity) {
-        if (rentalRepository.existsById(rentalEntity.getRentalId())) {
-            return mapper.convertValue(
-                    rentalRepository.save(rentalEntity), Rental.class);
+    public Rental update(Rental rental) {
+        if (rentalRepository.existsById(rental.getRentalId())) {
+            return mapper.convertValue(rentalRepository.save(
+                            mapper.convertValue(rental, RentalEntity.class)),
+                    Rental.class);
         }
         return null;
     }
