@@ -19,8 +19,8 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @PostMapping()
-    public Customer persist(@RequestBody CustomerEntity customerEntity) {
-        return customerService.persist(customerEntity);
+    public Customer persist(@RequestBody Customer customer) {
+        return customerService.persist(customer);
     }
 
     @GetMapping("/retrieve-all")
@@ -29,8 +29,8 @@ public class CustomerController {
     }
 
     @PutMapping("/update")
-    public Customer update(@RequestBody CustomerEntity customerEntity) {
-        return customerService.update(customerEntity);
+    public Customer update(@RequestBody Customer customer) {
+        return customerService.update(customer);
     }
 
     @DeleteMapping("/delete/{id}")

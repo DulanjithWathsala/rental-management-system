@@ -1,7 +1,9 @@
 package edu.icet.rms.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.icet.rms.entity.CustomerEntity;
 import edu.icet.rms.entity.HardwareItemEntity;
+import edu.icet.rms.model.Customer;
 import edu.icet.rms.model.HardwareItem;
 import edu.icet.rms.repository.HardwareItemRepository;
 import edu.icet.rms.service.HardwareItemService;
@@ -20,9 +22,10 @@ public class HardwareServiceImpl implements HardwareItemService {
 
     private final ObjectMapper mapper;
     @Override
-    public HardwareItem persist(HardwareItemEntity hardwareItemEntity) {
-        return mapper.convertValue(
-                hardwareItemRepository.save(hardwareItemEntity), HardwareItem.class);
+    public HardwareItem persist(HardwareItem hardwareItem) {
+        return mapper.convertValue(hardwareItemRepository.save(
+                        mapper.convertValue(hardwareItem, HardwareItemEntity.class)),
+                HardwareItem.class);
     }
 
     @Override
@@ -36,10 +39,11 @@ public class HardwareServiceImpl implements HardwareItemService {
     }
 
     @Override
-    public HardwareItem update(HardwareItemEntity hardwareItemEntity) {
-        if (hardwareItemRepository.existsById(hardwareItemEntity.getItemId())) {
-            return mapper.convertValue(
-                    hardwareItemRepository.save(hardwareItemEntity), HardwareItem.class);
+    public HardwareItem update(HardwareItem hardwareItem) {
+        if (hardwareItemRepository.existsById(hardwareItem.getItemId())) {
+            return mapper.convertValue(hardwareItemRepository.save(
+                            mapper.convertValue(hardwareItem, HardwareItemEntity.class)),
+                    HardwareItem.class);
         }
         return null;
     }

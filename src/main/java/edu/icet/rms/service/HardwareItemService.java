@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface HardwareItemService {
 
-    HardwareItem persist(HardwareItemEntity hardwareItemEntity);
+    HardwareItem persist(HardwareItem hardwareItem);
 
     List<HardwareItem> retrieveAll();
 
-    HardwareItem update(HardwareItemEntity hardwareItemEntity);
+    HardwareItem update(HardwareItem hardwareItem);
 
     String deleteById(Long id);
 

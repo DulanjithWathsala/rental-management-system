@@ -21,9 +21,10 @@ public class CustomerServiceImpl implements CustomerService {
     private final ObjectMapper mapper;
 
     @Override
-    public Customer persist(CustomerEntity customerEntity) {
-        return mapper.convertValue(
-                customerRepository.save(customerEntity), Customer.class);
+    public Customer persist(Customer customer) {
+        return mapper.convertValue(customerRepository.save(
+                mapper.convertValue(customer, CustomerEntity.class)),
+                Customer.class);
     }
 
     @Override
@@ -37,10 +38,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer update(CustomerEntity customerEntity) {
-        if (customerRepository.existsById(customerEntity.getCustomerId())) {
-            return mapper.convertValue(
-                    customerRepository.save(customerEntity), Customer.class);
+    public Customer update(Customer customer) {
+        if (customerRepository.existsById(customer.getCustomerId())) {
+            return mapper.convertValue(customerRepository.save(
+                            mapper.convertValue(customer, CustomerEntity.class)),
+                    Customer.class);
         }
         return null;
     }

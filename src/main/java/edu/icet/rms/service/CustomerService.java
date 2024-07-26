@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface CustomerService {
 
-    Customer persist(CustomerEntity customerEntity);
+    Customer persist(Customer customer);
 
     List<Customer> retrieveAll();
 
-    Customer update(CustomerEntity customerEntity);
+    Customer update(Customer customer);
 
     String deleteById(Long id);
 
