@@ -13,7 +13,7 @@ public interface CustomerService {
 
     Customer update(CustomerEntity customerEntity);
 
-    void deleteById(Long id);
+    String deleteById(Long id);
 
     Customer searchById(Long id);
 }
