@@ -3,6 +3,7 @@ package edu.icet.rms.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.icet.rms.entity.CustomerEntity;
 import edu.icet.rms.entity.HardwareItemEntity;
+import edu.icet.rms.exception.ObjectNotFoundException;
 import edu.icet.rms.model.Customer;
 import edu.icet.rms.repository.CustomerRepository;
 import edu.icet.rms.service.CustomerService;
@@ -40,12 +41,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer update(Customer customer) {
-        if (customerRepository.existsById(customer.getCustomerId())) {
-            return mapper.convertValue(customerRepository.save(
-                            mapper.convertValue(customer, CustomerEntity.class)),
-                    Customer.class);
+        if (!customerRepository.existsById(customer.getCustomerId())) {
+            throw new ObjectNotFoundException("Customer not found");
         }
-        return null;
+        return mapper.convertValue(customerRepository.save(
+                        mapper.convertValue(customer, CustomerEntity.class)),
+                Customer.class);
     }
 
     @Override
@@ -60,10 +61,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer searchById(Long id) {
         Optional<CustomerEntity> customerEntity = customerRepository.findById(id);
-        if (customerEntity.isPresent()) {
-            return mapper.convertValue(customerEntity.get(), Customer.class);
+        if (customerEntity.isEmpty()) {
+            throw new ObjectNotFoundException("Customer not found");
         }
-        return null;
+        return mapper.convertValue(customerEntity.get(), Customer.class);
     }
 
     @Override

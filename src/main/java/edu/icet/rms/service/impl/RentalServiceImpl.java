@@ -2,6 +2,7 @@ package edu.icet.rms.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.icet.rms.entity.RentalEntity;
+import edu.icet.rms.exception.ObjectNotFoundException;
 import edu.icet.rms.model.Rental;
 import edu.icet.rms.repository.RentalRepository;
 import edu.icet.rms.service.RentalService;
@@ -39,12 +40,12 @@ public class RentalServiceImpl implements RentalService {
 
     @Override
     public Rental update(Rental rental) {
-        if (rentalRepository.existsById(rental.getRentalId())) {
-            return mapper.convertValue(rentalRepository.save(
-                            mapper.convertValue(rental, RentalEntity.class)),
-                    Rental.class);
+        if (!rentalRepository.existsById(rental.getRentalId())) {
+            throw new ObjectNotFoundException("Rental not found");
         }
-        return null;
+        return mapper.convertValue(rentalRepository.save(
+                        mapper.convertValue(rental, RentalEntity.class)),
+                Rental.class);
     }
 
     @Override
@@ -59,9 +60,9 @@ public class RentalServiceImpl implements RentalService {
     @Override
     public Rental searchById(Long id) {
         Optional<RentalEntity> rentalEntity = rentalRepository.findById(id);
-        if (rentalEntity.isPresent()) {
-            return mapper.convertValue(rentalEntity.get(), Rental.class);
+        if (rentalEntity.isEmpty()) {
+            throw new ObjectNotFoundException("Rental not found");
         }
-        return null;
+        return mapper.convertValue(rentalEntity.get(), Rental.class);
     }
 }

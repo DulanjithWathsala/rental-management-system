@@ -2,6 +2,7 @@ package edu.icet.rms.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.icet.rms.entity.HardwareItemEntity;
+import edu.icet.rms.exception.ObjectNotFoundException;
 import edu.icet.rms.model.HardwareItem;
 import edu.icet.rms.repository.HardwareItemRepository;
 import edu.icet.rms.service.HardwareItemService;
@@ -38,12 +39,12 @@ public class HardwareServiceImpl implements HardwareItemService {
 
     @Override
     public HardwareItem update(HardwareItem hardwareItem) {
-        if (hardwareItemRepository.existsById(hardwareItem.getItemId())) {
-            return mapper.convertValue(hardwareItemRepository.save(
-                            mapper.convertValue(hardwareItem, HardwareItemEntity.class)),
-                    HardwareItem.class);
+        if (!hardwareItemRepository.existsById(hardwareItem.getItemId())) {
+            throw new ObjectNotFoundException("Hardware Item not found");
         }
-        return null;
+        return mapper.convertValue(hardwareItemRepository.save(
+                        mapper.convertValue(hardwareItem, HardwareItemEntity.class)),
+                HardwareItem.class);
     }
 
     @Override
@@ -58,10 +59,10 @@ public class HardwareServiceImpl implements HardwareItemService {
     @Override
     public HardwareItem searchById(Long id) {
         Optional<HardwareItemEntity> hardwareItemEntity = hardwareItemRepository.findById(id);
-        if (hardwareItemEntity.isPresent()) {
-            return mapper.convertValue(hardwareItemEntity.get(), HardwareItem.class);
+        if (hardwareItemEntity.isEmpty()) {
+            throw new ObjectNotFoundException("Hardware Item not found");
         }
-        return null;
+        return mapper.convertValue(hardwareItemEntity.get(), HardwareItem.class);
     }
 
     @Override

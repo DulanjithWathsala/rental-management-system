@@ -3,6 +3,7 @@ package edu.icet.rms.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.icet.rms.entity.HardwareItemEntity;
 import edu.icet.rms.entity.RentalDetailEntity;
+import edu.icet.rms.exception.ObjectNotFoundException;
 import edu.icet.rms.model.HardwareItem;
 import edu.icet.rms.model.RentalDetail;
 import edu.icet.rms.repository.RentalDetailRepository;
@@ -41,12 +42,12 @@ public class RentalDetailServiceImpl implements RentalDetailService {
 
     @Override
     public RentalDetail update(RentalDetail rentalDetail) {
-        if (rentalDetailRepository.existsById(rentalDetail.getRentalDetailId())) {
-            return mapper.convertValue(rentalDetailRepository.save(
-                            mapper.convertValue(rentalDetail, RentalDetailEntity.class)),
-                    RentalDetail.class);
+        if (!rentalDetailRepository.existsById(rentalDetail.getRentalDetailId())) {
+            throw new ObjectNotFoundException("Rental Detail not found");
         }
-        return null;
+        return mapper.convertValue(rentalDetailRepository.save(
+                        mapper.convertValue(rentalDetail, RentalDetailEntity.class)),
+                RentalDetail.class);
     }
 
     @Override
@@ -61,9 +62,9 @@ public class RentalDetailServiceImpl implements RentalDetailService {
     @Override
     public RentalDetail searchById(Long id) {
         Optional<RentalDetailEntity> rentalDetailEntity = rentalDetailRepository.findById(id);
-        if (rentalDetailEntity.isPresent()) {
-            return mapper.convertValue(rentalDetailEntity.get(), RentalDetail.class);
+        if (rentalDetailEntity.isEmpty()) {
+            throw new ObjectNotFoundException("Rental Detail not found");
         }
-        return null;
+        return mapper.convertValue(rentalDetailEntity.get(), RentalDetail.class);
     }
 }
