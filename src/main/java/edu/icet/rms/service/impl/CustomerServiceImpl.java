@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -38,16 +38,28 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer update(CustomerEntity customerEntity) {
+        if (customerRepository.existsById(customerEntity.getCustomerId())) {
+            return mapper.convertValue(
+                    customerRepository.save(customerEntity), Customer.class);
+        }
         return null;
     }
 
     @Override
     public String deleteById(Long id) {
-        return null;
+        if (customerRepository.existsById(id)) {
+            customerRepository.deleteById(id);
+            return "SUCCESS";
+        }
+        return "FAILED";
     }
 
     @Override
     public Customer searchById(Long id) {
+        Optional<CustomerEntity> customerEntity = customerRepository.findById(id);
+        if (customerEntity.isPresent()) {
+            return mapper.convertValue(customerEntity.get(), Customer.class);
+        }
         return null;
     }
 }
