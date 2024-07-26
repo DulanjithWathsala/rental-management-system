@@ -13,7 +13,7 @@ public interface RentalDetailService {
 
     RentalDetail update(RentalDetailEntity rentalDetailEntity);
 
-    void deleteById(Long id);
+    String deleteById(Long id);
 
     RentalDetail searchById(Long id);
 }
