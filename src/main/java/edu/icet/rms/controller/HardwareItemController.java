@@ -27,6 +27,12 @@ public class HardwareItemController {
         return hardwareItemService.retrieveAll();
     }
 
+    @GetMapping("/retrieve-all-ids")
+    public List<Long> retrieveAllIds() {
+        return hardwareItemService.retrieveAllIds();
+    }
+
+
     @PutMapping("/update")
     public HardwareItem update(@RequestBody HardwareItem hardwareItem) {
         return hardwareItemService.update(hardwareItem);

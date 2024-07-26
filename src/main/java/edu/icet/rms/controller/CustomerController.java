@@ -27,6 +27,11 @@ public class CustomerController {
         return customerService.retrieveAll();
     }
 
+    @GetMapping("/retrieve-all-ids")
+    public List<Long> retrieveAllIds() {
+        return customerService.retrieveAllIds();
+    }
+
     @PutMapping("/update")
     public Customer update(@RequestBody Customer customer) {
         return customerService.update(customer);
