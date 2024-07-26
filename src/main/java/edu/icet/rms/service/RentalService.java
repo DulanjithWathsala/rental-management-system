@@ -1,10 +1,8 @@
 package edu.icet.rms.service;
 
-import edu.icet.rms.entity.RentalDetailEntity;
+
 import edu.icet.rms.entity.RentalEntity;
-import edu.icet.rms.model.HardwareItem;
 import edu.icet.rms.model.Rental;
-import edu.icet.rms.model.RentalDetail;
 
 import java.util.List;
 

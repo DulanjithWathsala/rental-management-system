@@ -1,8 +1,6 @@
 package edu.icet.rms.service;
 
-import edu.icet.rms.entity.CustomerEntity;
 import edu.icet.rms.entity.HardwareItemEntity;
-import edu.icet.rms.model.Customer;
 import edu.icet.rms.model.HardwareItem;
 
 import java.util.List;
