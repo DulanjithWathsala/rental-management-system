@@ -14,7 +14,7 @@ public interface RentalService {
 
     Rental update(RentalEntity rentalEntity);
 
-    void deleteById(Long id);
+    String deleteById(Long id);
 
     Rental searchById(Long id);
 }
