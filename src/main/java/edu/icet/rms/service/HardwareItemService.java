@@ -13,7 +13,7 @@ public interface HardwareItemService {
 
     HardwareItem update(HardwareItemEntity hardwareItemEntity);
 
-    void deleteById(Long id);
+    String deleteById(Long id);
 
     HardwareItem searchById(Long id);
 }
