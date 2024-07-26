@@ -63,4 +63,13 @@ public class HardwareServiceImpl implements HardwareItemService {
         }
         return null;
     }
+
+    @Override
+    public List<Long> retrieveAllIds() {
+        List<Long> idList = new ArrayList<>();
+
+        Iterable<HardwareItemEntity> entities = hardwareItemRepository.findAll();
+        entities.forEach(hardwareItemEntity -> idList.add(hardwareItemEntity.getItemId()));
+        return  idList;
+    }
 }

@@ -2,6 +2,7 @@ package edu.icet.rms.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.icet.rms.entity.CustomerEntity;
+import edu.icet.rms.entity.HardwareItemEntity;
 import edu.icet.rms.model.Customer;
 import edu.icet.rms.repository.CustomerRepository;
 import edu.icet.rms.service.CustomerService;
@@ -63,5 +64,14 @@ public class CustomerServiceImpl implements CustomerService {
             return mapper.convertValue(customerEntity.get(), Customer.class);
         }
         return null;
+    }
+
+    @Override
+    public List<Long> retrieveAllIds() {
+        List<Long> idList = new ArrayList<>();
+
+        Iterable<CustomerEntity> entities = customerRepository.findAll();
+        entities.forEach(hardwareItemEntity -> idList.add(hardwareItemEntity.getCustomerId()));
+        return  idList;
     }
 }

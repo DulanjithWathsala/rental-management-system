@@ -16,4 +16,6 @@ public interface CustomerService {
     String deleteById(Long id);
 
     Customer searchById(Long id);
+
+    List<Long> retrieveAllIds();
 }

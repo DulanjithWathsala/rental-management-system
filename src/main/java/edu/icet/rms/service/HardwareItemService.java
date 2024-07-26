@@ -16,4 +16,6 @@ public interface HardwareItemService {
     String deleteById(Long id);
 
     HardwareItem searchById(Long id);
+
+    List<Long> retrieveAllIds();
 }
